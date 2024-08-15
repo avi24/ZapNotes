@@ -1,0 +1,13 @@
+{
+  "name": "zapnotes",
+  "version": "1.0.0",
+  "description": "ZapNotes is a simple and user-friendly note-taking application designed to help you manage your notes efficiently. This project involves a Node.js backend with Express.js, MongoDB with mongoose ODM for storing notes, and a front-end interface for a smooth user experience. The project will uses passport-authentication and other middleware.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
