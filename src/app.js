@@ -3,21 +3,27 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
+const connectDB = require('./config/db.js');
+const { Note, User } = require('./models/index.js')
 
-// Create an Express app
-const app = express();
 
 // Define config variables
 // TODO: Define in .env later on
 const PORT = 9000;
 
+// Create an Express app
+const app = express();
+
+// Connect to the database
+connectDB();
+
 // Note: During research I found that as of v4.16.0+ Express has implemented
 // functionality of body-parser therefore I will use the express.json() and 
-// express.urlencoded() methods to handle the respective requests
+// express.urlencoded() methods to handle the respective request types
 // Middleware - Handle JSON requests 
 app.use(express.json());
 // Middleware - Handle urlencoded requests 
-app.use(express.urlencoded({ extended:true }));
+app.use(express.urlencoded({ extended: true }));
 // Middleware - Serve static pages from 'static' directory
 app.use(express.static(path.join(__dirname, '../static')));
 // Middleware - CORS handling
@@ -28,6 +34,7 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
+/*
 // Create a mock API - CRUD
 // Mock database
 let notes = [
@@ -91,7 +98,45 @@ app.delete('/notes/:id', (req, res) => {
         res.status(404).json({message: `Note ${id} not found`});
     }
 });
+*/
 
+// Now use a real database
+// Mock API - CRUD
+
+// Route for GET /notes
+app.get('/notes', async (req, res) => {
+    try {
+        const notes = await Note.find();
+
+        if(notes.length > 0) res.json(notes);
+        else res.status(200).send("No notes found.")
+    }
+    catch(err) {
+        res.status(500).json({message: err.message});
+    }
+
+    // Trying promise-chaining method also
+    // Note.find()
+    // .then(notes => {
+    //     if(notes.length > 0) res.json(notes);
+    //     else res.status(200).send("No notes found.")
+    // })
+    // .catch(err => {
+    //     res.status(500).send(`Error: ${err.message}`);
+    // });
+});
+
+// POST /notes
+app.post('/notes', async (req, res) => {
+    const note = new Note(req.body);
+    try {
+        await note.save();
+        res.status(201).json(note); // status 201 for successful creation
+    }
+    catch(err) {
+        res.status(500).send(`Error saving note: ${err.message}`);
+    }
+});
 
 // API - read notes
 app.get('/api/notes', async (req, res) => {
