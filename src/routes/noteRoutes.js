@@ -13,7 +13,7 @@ const noteController = require('../controllers/noteController.js');
 // Define the routes and link them to the controller methods
 router.get('/', noteController.getAllNotes);
 router.post('/', noteController.createNote);
-router.patch('/:id', noteController.updateNote);
-router.delete('/:id', noteController.deleteNote);
+router.patch('/:id', noteController.updateNoteById);
+router.delete('/:id', noteController.deleteNoteById);
 
 module.exports = router;

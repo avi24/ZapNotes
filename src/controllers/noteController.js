@@ -61,7 +61,7 @@ app.put('/notes/:id', async (req, res) => {
 */
 
 // Update a note by ID
-const updateNote = async (req, res) => {
+const updateNoteById = async (req, res) => {
     try {
         const id = req.params.id;
         const note = await Note.findByIdAndUpdate(id, req.body, {new: true});
@@ -73,7 +73,7 @@ const updateNote = async (req, res) => {
 };
 
 // Delete a note by ID
-const deleteNote = async (req, res) => {
+const deleteNoteById = async (req, res) => {
     try {
         const id = req.params.id;
         await Note.findByIdAndDelete(id); // this method can take a string because MongoDB converts it internally to an ObjectID type
@@ -86,6 +86,6 @@ const deleteNote = async (req, res) => {
 module.exports = {
     getAllNotes,
     createNote,
-    updateNote,
-    deleteNote
+    updateNoteById,
+    deleteNoteById
 }
