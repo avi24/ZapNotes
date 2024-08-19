@@ -2,7 +2,8 @@
 const username = document.querySelector("#userName");
 const email = document.querySelector("#userEmail");
 const age = document.querySelector("#userAge");
-const userInfo = document.querySelector("#userInfo")
+const userInfo = document.querySelector("#userInfo");
+const notesList = document.querySelector("#notesList");
 
 // Add event listener to the fetch button
 fetchButton.addEventListener("click", () => {
@@ -16,16 +17,19 @@ fetchButton.addEventListener("click", () => {
             console.log(data);
             // Clear the userInfo panel
             userInfo.innerHTML = '';
+            notesList.innerHTML = '';
 
             // Loop through the data and append to the userInfo panel
             data.forEach(note => {
-                const noteElement = document.createElement("div");
-                noteElement.innerHTML = `
-                <h2>${note.title}</h2>
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                <h4>${note.title}</h4>
                 <p>${note.message}</p>
                 `
-                userInfo.appendChild(noteElement);
+                notesList.appendChild(listItem);
             })
+
+            userInfo.appendChild(notesList);
 
             // const userElement = document.createElement("div");
 

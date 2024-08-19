@@ -12,8 +12,15 @@ const userController = require('../controllers/userController.js');
 
 // Define the routes and link them to the controller methods
 router.get('/', userController.getAllUsers);
+router.get('/:userId', userController.getUserById);
 router.post('/', userController.createUser);
-router.patch('/:id', userController.updateUserById);
-router.delete('/:id', userController.deleteUserById);
+router.patch('/:userId', userController.updateUserById);
+router.delete('/:userId', userController.deleteUserById);
+
+// Sub-document routes
+router.get('/:userId/notes', userController.getNotes);
+router.post('/:userId/notes', userController.createNote);
+router.patch('/:userId/notes/:noteId', userController.updateNote);
+router.delete('/:userId/notes/:noteId', userController.deleteNote);
 
 module.exports = router;

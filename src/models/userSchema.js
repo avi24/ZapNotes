@@ -1,5 +1,28 @@
 const mongoose = require('mongoose');
 
+const NoteSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: [true, 'Title is required'],
+            minlength: [1, 'Title must be at least 1 characters long'],
+            // maxlength: [99, 'Title must be less than 100 characters long']
+        },
+        message: {
+            type: String,
+            required: true
+        },
+        // just trying sample enum field in Mongo DB
+        priority: {
+            type: String,
+            enum: {
+                values: ['high', 'medium', 'low'],
+                message: 'Type must be either public or private'
+            }
+        },        
+    }, { timestamps: true } // let mongoose handle createdAt and updatedAt natively
+);
+
 const UserSchema = new mongoose.Schema(
     {
         name: {
@@ -16,13 +39,13 @@ const UserSchema = new mongoose.Schema(
             type: Date,
             // required: [true, 'Date of birth is required'],
             min: '1900-01-01',
-            max: new Date() // no age requirement but must be maximum new born baby  
+            max: new Date() // max age is today's date 
         },
         username: {
             type: String,
             required: [true, 'Username is required'],
             unique: true,
-            // min: [1, 'Username cannot be blank']
+            min: [1, 'Username cannot be blank']
         },
         password: {
             type: String,
@@ -32,12 +55,11 @@ const UserSchema = new mongoose.Schema(
             select: false // this is to prevent password from being displayed in the console
         },
         phoneNumber: {
-            type: String
+            type: Number,
+            min: [10, 'Phone number must be at least 10 digits']
         },
-        address: {
-            type: String
-        }
-    }
+        notes: [NoteSchema]
+    }, { timestamps: true } // let mongoose handle createdAt and updatedAt natively
 );
 
 // Create the User model
