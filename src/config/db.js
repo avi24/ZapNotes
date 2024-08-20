@@ -6,7 +6,7 @@
 
 const mongoose = require('mongoose');
 
-const MONGO_URI = "mongodb://localhost:27017/zapnotes";
+const MONGO_URI = process.env.DATABASE_URI || 'mongodb://localhost:27017/zapnotes';
 
 // CONNECT TO MONGODB
 const connectDB = () => {

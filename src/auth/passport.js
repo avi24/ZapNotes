@@ -5,14 +5,15 @@ const User = require('../models/userSchema.js');
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         try {
-        const user = await User.findOne({ username });
+            const user = await User.findOne({ username });
 
-        // Validate user and password data
-        // TODO: implement verifyPassword method in model
-        if (!user || !user.verifyPassword(password)) {
-            return done(null, false, { message: 'Incorrect credentials.' });
-        }
-        
+            // Validate user and password data
+            // TODO: implement verifyPassword method in model
+            // if (!user || !user.verifyPassword(password)) {
+            if (!user || user.password !== password) {
+                return done(null, false, { message: 'Incorrect credentials.' });
+            }
+            
             return done(null, user);
         } catch (error) {
             return done(error);

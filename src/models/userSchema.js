@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
             // required: [true, 'Password is required'],
             min: [8, 'Password must be at least 8 characters'],
             max: [32, 'Password must not exceed 32 characters'],
-            select: false // this is to prevent password from being displayed in the console
+            select: false // this is to prevent password from being displayed in the results
         },
         phoneNumber: {
             type: Number,
