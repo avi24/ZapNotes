@@ -11,16 +11,18 @@ const userController = require('../controllers/userController.js');
 // console.log(userController);
 
 // Define the routes and link them to the controller methods
-router.get('/', userController.getAllUsers);
-router.get('/:userId', userController.getUserById);
-router.post('/', userController.createUser);
-router.patch('/:userId', userController.updateUserById);
-router.delete('/:userId', userController.deleteUserById);
+router.get('/users', userController.getAllUsers);
+router.get('/user/:userId', userController.getUserById);
+router.post('/signup', userController.createUser);
+router.patch('/user/:userId', userController.updateUserById);
+router.delete('/user/:userId', userController.deleteUserById);
 
 // Sub-document routes
-router.get('/:userId/notes', userController.getNotes);
-router.post('/:userId/notes', userController.createNote);
-router.patch('/:userId/notes/:noteId', userController.updateNote);
-router.delete('/:userId/notes/:noteId', userController.deleteNote);
+router.get('/user/:userId/notes', userController.getNotes);
+router.post('/user/:userId/note', userController.createNote);
+router.patch('/user/:userId/note/:noteId', userController.updateNote);
+router.delete('/user/:userId/note/:noteId', userController.deleteNote);
+
+
 
 module.exports = router;
