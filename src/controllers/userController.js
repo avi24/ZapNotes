@@ -5,6 +5,7 @@
 
 // Import mongoose for native error handling
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt');
 // Import our schema
 const User = require('../models/userSchema.js');
 
@@ -42,8 +43,10 @@ const getUserById = async (req, res, next) => {
 
 // Create a new user
 const createUser = async (req, res, next) => {
-    const newUser = new User(req.body);
     try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10); // hash the password before storing
+        req.body.password = hashedPassword;
+        const newUser = new User(req.body);
         await newUser.save();
         res.status(201).json(newUser); // status 201 for successful creation
     }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const NoteSchema = new mongoose.Schema(
     {
@@ -61,6 +62,10 @@ const UserSchema = new mongoose.Schema(
         notes: [NoteSchema]
     }, { timestamps: true } // let mongoose handle createdAt and updatedAt natively
 );
+
+UserSchema.methods.verifyPassword = async function(inputPassword) {
+    return await bcrypt.compare(inputPassword, this.password);
+}
 
 // Create the User model
 const User = mongoose.model("User", UserSchema);

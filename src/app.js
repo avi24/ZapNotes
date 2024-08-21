@@ -8,6 +8,7 @@ const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./config/db.js');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 const passport = require('./auth/passport.js');
 const passportJwt = require('./auth/passport-jwt.js');
 const jwt = require('jsonwebtoken');
@@ -76,23 +77,21 @@ app.get('/profile', passportJwt.authenticate('jwt'), (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
     try {
-
+        const { username, password } = req.body;
+        
         // since password is set to select:false in the Schema, use .select() chaining to override
-        // TODO: implement bcrypt and verifyPassword to complete auth for this app
         const user = await User.findOne({ username }).select('+password');
-        // const user = await User.findOne({ username }).select;
         if (!user) {
-            return res.status(401).json({ message: 'Invalid username or password. No user' });
+            return res.status(401).json({ message: 'Invalid username or password.' });
         }
 
         // console.log(`User.password: ${user.password}, Password:${password}`);
 
-        // const isValidPassword = await bcrypt.compare(password, user.password);
-        // if (!isValidPassword) {
-        if (user.password !== password) {
-            return res.status(401).json({ message: 'Invalid username or password. Wrong password.' });
+        const isMatch = await user.verifyPassword(password);
+        if (!isMatch) {
+        // if (user.password !== password) {
+            return res.status(401).json({ message: 'Invalid username or password.' });
         }
 
         const accessToken = jwt.sign(
