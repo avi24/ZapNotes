@@ -34,24 +34,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Auth - Authenticate users
 app.use(passport.initialize());
-// Static directory
+// Static directory for static content (images, CSS, js, etc.)
 app.use(express.static('assets'));
 
-// Specify paths to directories
+// Specify 'views/' directory and set the rendering engine
 app.set('views', path.join(__dirname, 'views'));
-// Static file - Serve static pages from 'static' directory (ie. CSS, JS, images)
-
-// Set rendering engine
 app.set('view engine', 'ejs');
 
-// Express Static middleware to serve pages from my static directory
-// app.use(express.static('static'));
-// app.use(express.static(__dirname + 'static'));
-// Routes Handlers
-// Route for homepage
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
-// });
 // app.use('/', homeRoute);
 // app.use('/notes', noteRoutes);
 app.use('/api', userRoutes);
@@ -59,7 +48,11 @@ app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.render('index');
-})
+});
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
 
 app.get('/', (req, res) => {
     if(!req.isAuthenticated) {
@@ -76,8 +69,6 @@ app.get('/logout', (req,res) => {
         res.redirect('/login');
     })
 });
-
-console.log(app.get('title'));
 
 // Error handling middleware (placed at bottom of stack to act as final catch-all)
 app.use(errorHandler);
