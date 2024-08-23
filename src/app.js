@@ -8,9 +8,7 @@ const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./config/dbConfig.js');
 const passport = require('./config/passportConfig.js');
-const jwt = require('jsonwebtoken');
 const errorHandler = require('./middleware/errorHandler.js');
-const User = require('./models/userSchema.js');
 
 // Import routes
 // const homeRoute = require('./routes/home.js');
@@ -34,10 +32,17 @@ app.use(cors());
 app.use(express.json());
 // Body parsing - Handle urlencoded requests 
 app.use(express.urlencoded({ extended: true }));
-// Static file - Serve static pages from 'static' directory (ie. HTML, CSS)
-app.use(express.static(path.join(__dirname, '../static')));
 // Auth - Authenticate users
 app.use(passport.initialize());
+// Static directory
+app.use(express.static('assets'));
+
+// Specify paths to directories
+app.set('views', path.join(__dirname, 'views'));
+// Static file - Serve static pages from 'static' directory (ie. CSS, JS, images)
+
+// Set rendering engine
+app.set('view engine', 'ejs');
 
 // Express Static middleware to serve pages from my static directory
 // app.use(express.static('static'));
@@ -51,6 +56,10 @@ app.use(passport.initialize());
 // app.use('/notes', noteRoutes);
 app.use('/api', userRoutes);
 app.use('/auth', authRoutes);
+
+app.get('/', (req, res) => {
+    res.render('index');
+})
 
 app.get('/', (req, res) => {
     if(!req.isAuthenticated) {
@@ -67,6 +76,8 @@ app.get('/logout', (req,res) => {
         res.redirect('/login');
     })
 });
+
+console.log(app.get('title'));
 
 // Error handling middleware (placed at bottom of stack to act as final catch-all)
 app.use(errorHandler);

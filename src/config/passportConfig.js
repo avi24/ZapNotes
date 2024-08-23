@@ -14,7 +14,7 @@ const options = {
 }
 
 passport.use(new Strategy(options, async (payload, done) => {
-    try{
+    try {
         // console.log(`Strategy: creating the user...`);
         const user = await User.findById(payload.id);
         // console.log(`User: ${user}`);
