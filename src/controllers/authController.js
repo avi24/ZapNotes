@@ -8,12 +8,12 @@ const User = require('../models/userSchema.js');
 // login user
 const login = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
         
         // since password is set to select:false in the Schema, use .select() chaining to override
-        const user = await User.findOne({ username }).select('+password');
+        const user = await User.findOne({ email }).select('+password');
         if (!user) {
-            return res.status(401).json({ message: 'Invalid username or password.' });
+            return res.status(401).json({ message: 'Invalid email or password.' });
         }
 
         // console.log(`User.password: ${user.password}, Password:${password}`);
@@ -21,7 +21,7 @@ const login = async (req, res) => {
         const isMatch = await user.verifyPassword(password);
         if (!isMatch) {
         // if (user.password !== password) {
-            return res.status(401).json({ message: 'Invalid username or password.' });
+            return res.status(401).json({ message: 'Invalid email or password.' });
         }
 
         const accessToken = jwt.sign(

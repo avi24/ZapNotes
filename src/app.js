@@ -54,6 +54,14 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
 app.get('/', (req, res) => {
     if(!req.isAuthenticated) {
         res.redirect('/');

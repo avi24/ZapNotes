@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ZapNotes</title>
+    <title>About - ZapNotes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
     <link href="/css/headers.css" rel="stylesheet">
@@ -34,18 +34,27 @@
     <header>
         <!-- Use partials for modularity. In order to send variables to partials, pass them as objects in the include statement -->
         <!-- I wanted to use the Bootstrap 'active' class to highlight buttons depending on which button you click -->
-        <%- include('partials/header', {activePage: 'home'}) %>
+        <%- include('partials/header', {activePage: 'about'}) %>
     </header>
-    
-    <main class="px-3 d-flex justify-content-center align-items-center">
-        <div class="container text-center">
-            <h1>ZapNotes</h1>
-            <p class="lead">A note-writing application for today's world.</p>
-            <p><button type="button" class="btn btn-primary">Sign Up</button></p>
-            <p><small>Already have an account? <a href="/login">Sign In</small></p>
-        </div>
-    </main>     
+    <main>
+        <div class="px-3">
+            <p class="display-6">ZapNotes is a web application demonstration built using the MERN stack (minus the R).</p>
 
+            <p>The back-end is comprised of:</p>
+            <ul>
+                <li>MongoDB, which is used as the database.</li> 
+                <li>The server runtime environment is provided by Node.js.</li>
+                <li>Mongoose serves as the Object Data Modeling (ODM) library for MongoDB.</li>
+                <li>Express acts as the web framework to handle server-side logic and routing.</li>
+            </ul>
+            <p>Front-end:</p>
+            <ul>
+                <li>EJS, which is used as the templating engine to render dynamic HTML views.</li>
+                <li>Bootstrap, which is applied as the front-end framework for styling and responsive design.</li>
+            </ul>
+            <p>ZapNotes showcases a full-stack application where the back-end manages data and logic, while the front-end provides an interactive user interface.</p>
+        </div>
+    </main>
     <footer>
         <%- include('partials/footer') %>
     </footer>

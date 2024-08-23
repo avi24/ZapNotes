@@ -42,12 +42,6 @@ const UserSchema = new mongoose.Schema(
             min: '1900-01-01',
             max: new Date() // max age is today's date 
         },
-        username: {
-            type: String,
-            required: [true, 'Username is required'],
-            unique: true,
-            min: [1, 'Username cannot be blank']
-        },
         password: {
             type: String,
             // required: [true, 'Password is required'],
