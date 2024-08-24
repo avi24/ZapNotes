@@ -27,4 +27,6 @@ To set up and run the ZapNotes application locally, follow these steps:
    ```bash
    git clone https://github.com/avi24/zapnotes.git
    cd zapnotes
+   npm install
+   npm start
    ```
