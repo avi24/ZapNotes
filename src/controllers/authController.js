@@ -34,7 +34,11 @@ const login = async (req, res) => {
     }
 }
 
-const authenticate = passport.authenticate('jwt', {session:false});
+const authenticate = passport.authenticate('jwt', {
+    session:false,
+    failureRedirect: '/login',
+    failureMessage: true,
+});
 
 module.exports = {
     login,

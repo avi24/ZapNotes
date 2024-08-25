@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom sticky-top bg-body-tertiary">
+ <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom sticky-top bg-body-tertiary">
     <symbol viewBox="0 0 118 94"><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 560.317 560.316" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833 C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806 L207.523,560.316z"></path> </g> </g> </g></svg></symbol>  
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
     <!-- <img class="bi me-2"  src="/images/favicon-32x32.png"> -->
@@ -7,8 +7,13 @@
 
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link <%= activePage === 'home' ? 'active' : '' %>" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/about" class="nav-link <%= activePage === 'about' ? 'active' : '' %>">About</a></li>
-        <li class="nav-item"><a href="/login" class="nav-link <%= activePage === 'login' ? 'active' : '' %>">Login</a></li>
-        <li class="nav-item"><a href="/signup" class="nav-link <%= activePage === 'signup' ? 'active' : '' %>">Sign Up</a></li>
+        <% if(true) { %>
+            <li class="nav-item"><a href="/profile" class="nav-link <%= activePage === 'profile' ? 'active' : '' %>">Profile</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+        <% } else { %>
+            <li class="nav-item"><a href="/about" class="nav-link <%= activePage === 'about' ? 'active' : '' %>">About</a></li>
+            <li class="nav-item"><a href="/login" class="nav-link <%= activePage === 'login' ? 'active' : '' %>">Login</a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link <%= activePage === 'signup' ? 'active' : '' %>">Sign Up</a></li>
+        <% } %>
     </ul>
 </div>

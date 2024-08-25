@@ -34,18 +34,19 @@
     <header>
         <!-- Use partials for modularity. In order to send variables to partials, pass them as objects in the include statement -->
         <!-- I wanted to use the Bootstrap 'active' class to highlight buttons depending on which button you click -->
-        <%- include('partials/header', {activePage: 'home'}) %>
+        <%- include('partials/header', { activePage: 'home' }) %>
     </header>
-    
+
     <main class="px-3 d-flex justify-content-center align-items-center">
         <div class="container text-center">
             <h1>ZapNotes</h1>
             <p class="lead">A note-writing application for today's world.</p>
-            <p><button type="button" class="btn btn-primary">Sign Up</button></p>
-            <p><small>Already have an account? <a href="/login">Sign In</small></p>
+            <!-- TODO: change onclick to addEventListener in the index js -->
+            <p><button type="button" class="btn btn-primary" onclick="window.location.href='/signup'">Sign up</button></p>
+            <p><small>Already have an account? <a href="/login">Sign in</small></p>
         </div>
-    </main>     
-
+    </main>  
+       
     <footer>
         <%- include('partials/footer') %>
     </footer>

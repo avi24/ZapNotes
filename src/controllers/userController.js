@@ -89,7 +89,8 @@ const getNotes = async (req, res, next) => {
     const userId = req.params.userId;
     try { 
         const user = await User.findById(userId);
-        res.json(user.notes);
+        // res.json(user.notes);
+        res.render('dashboard', { notes: user.notes });
     } catch (err) {
         next(err);
     }

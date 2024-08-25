@@ -18,8 +18,9 @@ const NoteSchema = new mongoose.Schema(
             type: String,
             enum: {
                 values: ['high', 'medium', 'low'],
-                message: 'Type must be either public or private'
-            }
+                message: 'Priority type must be either high, medium, or low',
+            },
+            default: 'low'
         },        
     }, { timestamps: true } // let mongoose handle createdAt and updatedAt natively
 );

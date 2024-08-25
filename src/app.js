@@ -10,6 +10,9 @@ const connectDB = require('./config/dbConfig.js');
 const passport = require('./config/passportConfig.js');
 const errorHandler = require('./middleware/errorHandler.js');
 
+// define model
+const User = require('./models/userSchema.js');
+
 // Import routes
 // const homeRoute = require('./routes/home.js');
 // const noteRoutes = require('./routes/noteRoutes.js');
@@ -37,6 +40,12 @@ app.use(passport.initialize());
 // Static directory for static content (images, CSS, js, etc.)
 app.use(express.static('assets'));
 
+// Create a middleware to set global values for EJS to use
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated(); // Set a flag indicating authentication status
+    next();
+});
+
 // Specify 'views/' directory and set the rendering engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -46,8 +55,15 @@ app.set('view engine', 'ejs');
 app.use('/api', userRoutes);
 app.use('/auth', authRoutes);
 
-app.get('/', (req, res) => {
-    res.render('index');
+
+
+app.get('/', async (req, res) => {
+    if(true) {
+        const user = await User.findById('66c25f240a8a26a066e8b608');
+        res.render('dashboard', { user, notes:user.notes })
+    } else {
+        res.render('index');
+    }        
 });
 
 app.get('/login', (req, res) => {
@@ -62,6 +78,15 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+app.get('/profile', async (req, res) => {
+    if(true) {
+        const user = await User.findById('66c25f240a8a26a066e8b608');
+        res.render('profile', { user, notes:user.notes })
+    } else {
+        res.render('index');
+    }
+});
+
 app.get('/', (req, res) => {
     if(!req.isAuthenticated) {
         res.redirect('/');
@@ -72,10 +97,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/logout', (req,res) => {
-    req.logout((err) => {
-        if(err) { throw err; }
         res.redirect('/login');
-    })
 });
 
 // Error handling middleware (placed at bottom of stack to act as final catch-all)
