@@ -21,8 +21,9 @@ passport.use(new Strategy(options, async (payload, done) => {
         if(!user) {
             return done(null, false, { message: 'User not found' });
         }
+        console.log('Passport strategy: User was identified.')
         return done(null, user);
-    } catch {
+    } catch(err) {
         return (`Strategy: ${err.message}`);
     }
 }));

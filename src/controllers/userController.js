@@ -90,7 +90,7 @@ const getNotes = async (req, res, next) => {
     try { 
         const user = await User.findById(userId);
         // res.json(user.notes);
-        res.render('dashboard', { notes: user.notes });
+        res.render('dashboard', { user, notes: user.notes });
     } catch (err) {
         next(err);
     }

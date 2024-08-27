@@ -8,10 +8,12 @@ const User = require('../models/userSchema.js');
 // login user
 const login = async (req, res) => {
     try {
+        console.log(`Req.body insde login method: ${req.body}`);
         const { email, password } = req.body;
         
         // since password is set to select:false in the Schema, use .select() chaining to override
         const user = await User.findOne({ email }).select('+password');
+        console.log(`User insde login method: ${user}`);
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password.' });
         }
