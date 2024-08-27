@@ -6,12 +6,14 @@ const NoteSchema = new mongoose.Schema(
         title: {
             type: String,
             required: [true, 'Title is required'],
-            minlength: [1, 'Title must be at least 1 characters long'],
-            // maxlength: [99, 'Title must be less than 100 characters long']
+            minlength: [1, 'Title cannot be blank'],
+            maxlength: [100, 'Title cannot exceed 100 characters']
         },
         message: {
             type: String,
-            required: true
+            required: true,
+            minlength: [1, 'Message cannot be blank'],
+            maxlength: [5000, 'Message cannot exceed 5000 characters'],
         },
         // just trying sample enum field in Mongo DB
         priority: {

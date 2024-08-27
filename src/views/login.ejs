@@ -109,11 +109,6 @@
         main {
             flex-grow: 1; /* Allows main to grow and fill the available space */
         }
-        #error-message {
-            text-align: center; /* Centers the text horizontally */
-            /*color: red;  Optional: Set the text color */
-            /*font-weight: bold;  Optional: Make the text bold */
-        }
       </style>  
 </head>  
 
@@ -123,11 +118,10 @@
 </header>  
 
 <main class="form-signin w-100 m-auto d-flex justify-content-center flex-column">
-  <div id="error-message" class="container alert alert-danger" style="display:none;"></div>
-  <form method="post" action="/auth/login">
+  <div id="response-message" class="container alert alert-danger" style="display:none;"></div>
+  <form>
     <!-- <img class="mb-4" src="/images/zapnotes-logo.svg" alt="" width="72" height="57"> -->
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" >
       <label for="floatingInput">Email address</label>

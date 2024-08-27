@@ -90,6 +90,4 @@ async function handleSignup(inputs) {
     } catch(err) {
         return `Error during signup: ${err.message}`;
     }
-   
-
 }

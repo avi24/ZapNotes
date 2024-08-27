@@ -24,10 +24,10 @@ function validatePassword(password) {
     const hasNoWhitespace = /^\S+$/.test(password);
 
     if (password.length < minLength || password.length > maxLength) {
-        return 'Password must be between 8 and 32 characters long.';
+        return `Password must be between ${minLength} and ${maxLength} characters long.`;
     }
     if (!hasUppercase || !hasLowercase || !hasNumber || !hasNumber || !hasSpecialChar || !hasNoWhitespace) {
-        return `<ul style="text-align:left">Password must contain at least:
+        return `<ul>Password must contain at least:
         <li>one uppercase letter</li>
         <li>one lowercase letter</li>
         <li>one number</li>
@@ -42,7 +42,6 @@ function validatePassword(password) {
 
 // Name validation helper function
 function validateName(name) {
-
     const nameRegex = /^[a-zA-Z\s'-]{1,50}$/; // Only allow letters, spaces and apostrophes
     const hasValidity = nameRegex.test(name);
     const minLength = 1;
@@ -57,4 +56,31 @@ function validateName(name) {
     }
     
     return '';
+}
+
+function isValidNoteTitle(noteTitle) {
+    const minLength = 0;
+    const maxLength = 100
+
+    if (noteTitle.length > minLength && noteTitle.length <= maxLength) {
+        return true;
+    }
+
+    return false;
+}
+
+function isValidNoteMessage(noteMessage) {
+    const minLength = 0;
+    const maxLength = 5000
+
+    if (noteMessage.length > minLength && noteMessage.length <= maxLength) {
+        return true;
+    }
+
+    return false;
+}
+
+export { 
+    isValidNoteTitle,
+    isValidNoteMessage,
 }

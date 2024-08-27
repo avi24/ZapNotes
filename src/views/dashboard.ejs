@@ -6,11 +6,13 @@
     <title>Dashboard - ZapNotes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
     <link href="/css/headers.css" rel="stylesheet">
     <link href="/css/sticky-footer.css" rel="stylesheet">
     <!-- <link href="/css/sidebars.css" rel="stylesheet"> -->
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <script src="/js/sidebars.js"></script>
+    <script src="/js/sidebars.js" defer></script>
+    <script type="module" src="/js/dashboard.js" defer></script>
     <style>
         html, body {
             height: 100%;
@@ -23,12 +25,18 @@
             overflow: hidden;
         }
 
-        header, footer {
+        header {
             flex-shrink: 0; /* Prevents shrinking of header/footer */
+            /* height: 72px; */
         }
 
         main {
             flex-grow: 1; /* Allows main to grow and fill the available space */
+            overflow: auto; /* Ensure main area can scroll if it overflows */
+        }
+
+        footer {
+            height: 70px; /* Set a height for the footer */
         }
 
         .note-card {
@@ -118,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addNoteModalLabel">Add New Note</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" id="btn-close-new-note" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addNoteForm">
@@ -135,15 +143,16 @@
                         <select class="form-select" id="notePriority" required>
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
+                            <option value="Low" selected>Low</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="submitNote()">Save Note</button>
+                <button type="button" class="btn btn-secondary" id="btn-cancel-new-note" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btn-save-new-note">Save Note</button>
             </div>
+            <div id="response-message" class="container alert" style="display:none;">Hi</div>
         </div>
     </div>
   </div>

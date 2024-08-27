@@ -6,7 +6,7 @@ btnSubmitLogin.addEventListener('click', async (e) => {
 
     const emailInput = document.querySelector('#floatingInput');
     const pwInput = document.querySelector('#floatingPassword');
-    const errorMsgDiv = document.querySelector("#error-message");
+    const divResponseMsg = document.querySelector("#response-message");
 
     const email = emailInput.value;
     const pw = pwInput.value;
@@ -16,8 +16,8 @@ btnSubmitLogin.addEventListener('click', async (e) => {
     let invalidFieldFlag;
 
     // Reset error messages
-    errorMsgDiv.style.display = 'none';
-    errorMsgDiv.textContent = '';
+    divResponseMsg.style.display = 'none';
+    divResponseMsg.textContent = '';
 
     // Front-end data validation
     // Validate email
@@ -26,7 +26,7 @@ btnSubmitLogin.addEventListener('click', async (e) => {
         const divNewError = document.createElement("div");
         divNewError.innerHTML = `Error: ${validateEmailMsg}`;
         // errorMsgDiv.innerHTML += `<p>Error: ${validateEmailMsg}</p>`;
-        errorMsgDiv.appendChild(divNewError);
+        divResponseMsg.appendChild(divNewError);
         
 
         invalidFieldFlag = true;
@@ -37,13 +37,13 @@ btnSubmitLogin.addEventListener('click', async (e) => {
     if(validatePwMsg !== '') {
         const divNewError = document.createElement("div");
         divNewError.innerHTML = `Error: ${validatePwMsg}`;
-        errorMsgDiv.appendChild(divNewError);
+        divResponseMsg.appendChild(divNewError);
         
         invalidFieldFlag = true;
     }
 
     if(invalidFieldFlag) {
-        errorMsgDiv.style.display = 'block';
+        divResponseMsg.style.display = 'block';
         return;
     }
 
@@ -51,8 +51,8 @@ btnSubmitLogin.addEventListener('click', async (e) => {
     const loginResponse = await handleLogin(email, pw);
 
     if(loginResponse !== '') {
-        errorMsgDiv.textContent =`${loginResponse}`;
-        errorMsgDiv.style.display = 'block';
+        divResponseMsg.textContent =`${loginResponse}`;
+        divResponseMsg.style.display = 'block';
     }
 });
 
@@ -75,8 +75,7 @@ btnTestLogin.addEventListener('click', async (e) => {
         errorMsgDiv.textContent =`${loginResponse}`;
         errorMsgDiv.style.display = 'block';
         return;
-    }
- 
+    } 
 });
 
 // User validation helper function
