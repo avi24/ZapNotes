@@ -76,7 +76,10 @@
       <!-- I wanted to use the Bootstrap 'active' class to highlight buttons depending on which button you click -->
       <%- include('partials/header', activePage='home') %> 
   </header>
-    
+
+  // Set user id to be used in script code programatically
+  <div id="userInfo" data-user-id="<%= user._id %>"></div>
+
   <main class="notes-dashboard">
     <h1 class="display-6 px-3">Welcome, <%= user.name %></h1>
     <div class="container-fluid my-4 full-width-container">
@@ -173,11 +176,15 @@
                   <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="noteModalLabel-<%= note._id %>"><%= note.title %></h5>
+                              <h5 class="modal-title" id="noteModalLabel-<%= note._id %>">
+                                <span class="note-title"><%= note.title %></span>
+                                <input type="text" size="50" class="edit-title form-control d-none" value="<%= note.title %>" />
+                              </h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                              <p><%= note.message %></p>
+                              <p class="note-message"><%= note.message %></p>
+                              <textarea class="edit-message form-control d-none"><%= note.message %></textarea>
                           </div>
                           <div class="modal-footer d-flex justify-content-between align-items-center">
                       
@@ -189,8 +196,10 @@
             
                             <!-- Buttons Section -->
                             <div>
-                                <a href="/notes/edit/<%= note._id %>" class="btn btn-primary me-2">Edit</a>
-                                <a href="/notes/delete/<%= note._id %>" class="btn btn-danger">Delete</a>
+                                <button class="btn btn-secondary me-2 edit-note-btn" data-note-id="<%= note._id %>">Edit</button>
+                                <button class="btn btn-danger delete-note-btn" data-note-id="<%= note._id %>">Delete</button>
+                                <button class="btn btn-success save-note-btn d-none" data-note-id="<%= note._id %>">Save</button>
+                                <button class="btn btn-secondary cancel-edit-btn d-none" data-note-id="<%= note._id %>">Cancel</button>
                             </div>
                         </div>
                       </div>
