@@ -6,9 +6,12 @@ const closeNewNoteBtn = document.querySelector("#btn-close-new-note");
 const cancelNewNoteBtn = document.querySelector("#btn-cancel-new-note");
 const divResponseMsg = document.querySelector("#response-message");
 
+// User ID to be taken on page load
+let userId;
+
 document.addEventListener("DOMContentLoaded", () => {
     // Store the user ID from the dashboard to be used in this script
-    const userId = document.getElementById('userInfo').getAttribute('data-user-id');
+    userId = document.getElementById('userInfo').getAttribute('data-user-id');
 
     // Handle Edit button click
     document.querySelectorAll('.edit-note-btn').forEach(button => {
@@ -172,7 +175,7 @@ saveNewNoteBtn.addEventListener('click', async (e) => {
 
             // Re-direct after a 1s delay
             setTimeout(() => {
-                window.location.href = '/api/user/66c25f240a8a26a066e8b608/notes';
+                window.location.href = `/api/user/${userId}/notes`;
             }, 1000);
         }
     }
@@ -203,7 +206,7 @@ cancelNewNoteBtn.addEventListener('click', (e) => {
 
 async function handleAddNote(inputs) {
     try{
-        await axios.post('/api/user/66c25f240a8a26a066e8b608/note', inputs);
+        await axios.post(`/api/user/${userId}/note`, inputs);
         return 'New note has been successfully added';
     } catch(err) {
         return `Error: ${err.message}`;

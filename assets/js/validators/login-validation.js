@@ -59,7 +59,7 @@ btnSubmitLogin.addEventListener('click', async (e) => {
 btnTestLogin.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    const errorMsgDiv = document.querySelector("#error-message");
+    const errorMsgDiv = document.querySelector("#response-message");
 
     const email = 'djokernole@example.com';
     const pw = 'Djokovic_1234';
@@ -101,7 +101,7 @@ async function handleLogin(email, password) {
 
         // Handle successful response
         window.location.href = '/'; // Redirect to client-side route
-        // await axios.post('/', {}, {
+        // await axios.get('/', {}, {
         //     headers: {
         //         'authorization': `Bearer ${localStorage.getItem('token')}`
         //     }  
