@@ -23,6 +23,4 @@ router.post('/user/:userId/note', userController.createNote);
 router.patch('/user/:userId/note/:noteId', userController.updateNote);
 router.delete('/user/:userId/note/:noteId', userController.deleteNote);
 
-
-
 module.exports = router;

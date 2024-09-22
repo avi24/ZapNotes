@@ -79,8 +79,3 @@ function isValidNoteMessage(noteMessage) {
 
     return false;
 }
-
-export { 
-    isValidNoteTitle,
-    isValidNoteMessage,
-}
