@@ -100,7 +100,7 @@ async function handleLogin(email, password) {
         localStorage.setItem('token', jwt);
 
         // Handle successful response
-        window.location.href = '/'; // Redirect to client-side route
+        window.location.href = '/dashboard'; // Redirect to client-side route
         // await axios.get('/', {}, {
         //     headers: {
         //         'authorization': `Bearer ${localStorage.getItem('token')}`

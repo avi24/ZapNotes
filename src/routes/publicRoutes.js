@@ -7,7 +7,7 @@ const checkAuthentication = require('../middleware/authentication.js');
 const router = express.Router();
 
 // Handle login
-router.get('/', checkAuthentication, publicController.checkUser);
+router.get('/', publicController.checkUser);
 router.post('/', checkAuthentication, publicController.checkUser);
 router.get('/login', (req, res) => {
     res.render('login');

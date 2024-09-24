@@ -27,10 +27,10 @@ const login = async (req, res) => {
         }
 
         const accessToken = jwt.sign(
-            {id: user._id}, process.env.SECRET_KEY, {expiresIn: '1h'}
+            {userId: user._id}, process.env.SECRET_KEY, {expiresIn: '1h'}
         );
 
-        res.json({ accessToken });
+        res.status(200).json({ accessToken });
     } catch (err) {
         res.status(500).json({message:`Could not log in: ${err.message}`});
     }
